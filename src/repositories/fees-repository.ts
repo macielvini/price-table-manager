@@ -1,7 +1,7 @@
 import { number } from "joi";
 import { QueryResult } from "pg";
 import { connection } from "../database/server.js";
-import { Fees, FeesEntity, FeesPartial } from "../protocols/Fees.js";
+import { Fees, FeesEntity, FeesPartial } from "../protocols/fees.js";
 
 export async function create(fees: Fees) {
   return await connection.query(

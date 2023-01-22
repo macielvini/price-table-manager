@@ -1,7 +1,7 @@
 import { Response, Request } from "express";
 import { validateSchema } from "../middlewares/validateSchema.js";
 import { feesSchema, updateFeesSchema } from "../models/fees-schema.js";
-import { Fees, FeesPartial } from "../protocols/Fees.js";
+import { Fees, FeesPartial } from "../protocols/fees.js";
 import {
   createData,
   deleteData,

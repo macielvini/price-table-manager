@@ -1,4 +1,4 @@
-import { FeesEntity } from "./Fees";
+import { FeesEntity } from "./fees";
 
 export type InstitutionEntity = {
   id: number;

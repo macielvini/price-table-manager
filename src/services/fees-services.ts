@@ -1,4 +1,4 @@
-import { Fees, FeesPartial } from "../protocols/Fees";
+import { Fees, FeesPartial } from "../protocols/fees";
 import {
   checkId,
   create,

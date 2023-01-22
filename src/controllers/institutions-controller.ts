@@ -39,11 +39,10 @@ export async function readAll(req: Request, res: Response) {
 
 export async function getById(req: Request, res: Response) {
   const { id } = req.params;
-  console.log(Number(id));
 
   try {
     const data = await getDataById(Number(id));
-    if (data.rowCount) return res.send(data.rows);
+    if (data.rowCount) return res.send(data.rows[0]);
 
     res.sendStatus(404);
   } catch (error) {

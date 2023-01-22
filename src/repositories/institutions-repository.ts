@@ -15,11 +15,19 @@ export async function readAll(): Promise<QueryResult<InstitutionEntity>> {
 
 export async function readById(id: number) {
   return connection.query(
-    `SELECT i.*, f.initial_fee, f.monthly_fee 
-    FROM institutions i
-    JOIN fees f
-    ON i.id = f.institution_id
-    WHERE i.id = $1`,
+    `select i.*,
+    json_agg(
+      json_build_object(
+        'name', f.name,
+        'InitialFee', f.initial_fee,
+        'monthlyFee', f.monthly_fee,
+        'maxNumOfInstallments', max_num_installments
+      )) as fees
+    from institutions i
+    join fees f
+    on i.id = f.institution_id
+    where i.id = $1
+    group by i.id;`,
     [id]
   );
 }

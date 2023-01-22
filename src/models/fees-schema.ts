@@ -7,3 +7,10 @@ export const feesSchema = joi.object({
   name: joi.string().max(55).required(),
   max_num_installments: joi.number().greater(0).required(),
 });
+
+export const updateFeesSchema = joi.object({
+  initial_fee: joi.number().required(),
+  monthly_fee: joi.number().greater(0).required(),
+  name: joi.string().max(55).required(),
+  max_num_installments: joi.number().greater(0).required(),
+});

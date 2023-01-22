@@ -8,3 +8,5 @@ export type FeesEntity = {
 };
 
 export type Fees = Omit<FeesEntity, "id">;
+
+export type FeesPartial = Partial<FeesEntity>;

@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { create } from "../controllers/fees-controller.js";
+import { create, update } from "../controllers/fees-controller.js";
 
 const router = Router();
 
 router.post("/fee", create);
+router.patch("/fee/:id", update);
 
 export default router;

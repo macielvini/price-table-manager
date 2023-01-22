@@ -12,3 +12,14 @@ export async function create(institution: Institution) {
 export async function readAll(): Promise<QueryResult<InstitutionEntity>> {
   return connection.query(`SELECT * FROM institutions`);
 }
+
+export async function readById(id: number) {
+  return connection.query(
+    `SELECT i.*, f.initial_fee, f.monthly_fee 
+    FROM institutions i
+    JOIN fees f
+    ON i.id = f.institution_id
+    WHERE i.id = $1`,
+    [id]
+  );
+}

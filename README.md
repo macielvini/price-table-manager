@@ -71,7 +71,9 @@ Returns a list of all institutions
 
 ### Get institution's fees `GET /institution/:id`
 
-Returns institution info and a list of available fees
+Returns institution info and a list of available fees.
+
+- If the instutition has no fees registered, returns 404.
 
 ```json
 {

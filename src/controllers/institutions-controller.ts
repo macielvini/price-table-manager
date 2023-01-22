@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { validateSchema } from "../middlewares/validateSchema.js";
 import { institutionSchema } from "../models/institution-schema.js";
 import { Institution } from "../protocols/institutions.js";
-import { readById } from "../repositories/institutions-repository.js";
 
 import {
   createData as createDataService,
@@ -38,10 +37,10 @@ export async function readAll(req: Request, res: Response) {
 }
 
 export async function getById(req: Request, res: Response) {
-  const { id } = req.params;
+  const id = Number(req.params.id);
 
   try {
-    const data = await getDataById(Number(id));
+    const data = await getDataById(id);
     if (data.rowCount) return res.send(data.rows[0]);
 
     res.sendStatus(404);

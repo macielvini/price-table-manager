@@ -31,3 +31,9 @@ export async function readById(id: number) {
     [id]
   );
 }
+
+export async function checkId(id: number) {
+  return await connection.query(`SELECT * FROM institutions WHERE id = $1`, [
+    id,
+  ]);
+}

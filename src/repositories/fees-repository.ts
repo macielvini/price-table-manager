@@ -1,3 +1,4 @@
+import { number } from "joi";
 import { connection } from "../database/server.js";
 import { Fees, FeesPartial } from "../protocols/Fees.js";
 
@@ -31,4 +32,17 @@ export async function update(fees: FeesPartial, id: number) {
       id,
     ]
   );
+}
+
+export async function deleteFee(id: number) {
+  return await connection.query(
+    `
+  DELETE FROM fees WHERE id = $1
+  `,
+    [id]
+  );
+}
+
+export async function checkId(id: number) {
+  return await connection.query(`SELECT * FROM fees WHERE id = $1`, [id]);
 }

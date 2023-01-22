@@ -2,7 +2,11 @@ import { Response, Request } from "express";
 import { validateSchema } from "../middlewares/validateSchema.js";
 import { feesSchema, updateFeesSchema } from "../models/fees-schema.js";
 import { Fees, FeesPartial } from "../protocols/Fees.js";
-import { createData, updateData } from "../services/fees-services.js";
+import {
+  createData,
+  deleteData,
+  updateData,
+} from "../services/fees-services.js";
 import { checkIdService } from "../services/institutions-services.js";
 
 export async function create(req: Request, res: Response) {
@@ -36,6 +40,18 @@ export async function update(req: Request, res: Response) {
 
   try {
     await updateData(incomingData, id);
+    res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
+
+export async function deleteFee(req: Request, res: Response) {
+  const { id } = res.locals;
+
+  try {
+    await deleteData(id);
     res.sendStatus(200);
   } catch (error) {
     console.log(error);

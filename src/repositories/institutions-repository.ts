@@ -1,5 +1,9 @@
 import { connection } from "../database/server.js";
-import { Institution, InstitutionEntity } from "../protocols/institutions.js";
+import {
+  Institution,
+  InstitutionAndFees,
+  InstitutionEntity,
+} from "../protocols/institutions.js";
 
 import { QueryResult } from "pg";
 
@@ -13,11 +17,14 @@ export async function readAll(): Promise<QueryResult<InstitutionEntity>> {
   return connection.query(`SELECT * FROM institutions`);
 }
 
-export async function readById(id: number) {
+export async function readById(
+  id: number
+): Promise<QueryResult<InstitutionAndFees>> {
   return connection.query(
     `select i.*,
     json_agg(
       json_build_object(
+        'id', f.id,
         'name', f.name,
         'InitialFee', f.initial_fee,
         'monthlyFee', f.monthly_fee,
@@ -32,7 +39,9 @@ export async function readById(id: number) {
   );
 }
 
-export async function checkId(id: number) {
+export async function checkId(
+  id: number
+): Promise<QueryResult<InstitutionEntity>> {
   return await connection.query(`SELECT * FROM institutions WHERE id = $1`, [
     id,
   ]);
